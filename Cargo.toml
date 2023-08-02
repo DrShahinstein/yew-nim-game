@@ -1,0 +1,31 @@
+[package]
+authors = ["<1taylanozturk@protonmail.com>"]
+categories = ["wasm", "rust", "yew", "nim-game", "minimax"]
+description = "A nim-game app built using yew.rs implementing the Minimax algorithm"
+edition = "2021"
+license = "GNU General Public License"
+name = "yew-app"
+readme = "./README.md"
+repository = "https://github.com/DrShahinstein/yew-nim-game.git"
+version = "0.1.0"
+
+[dependencies]
+log = "0.4"
+serde = "1"
+reqwest = { version = "0.11.13", features = ["json"] }
+yew = { version = "0.20.0", features = ["csr"] }
+yew-router = "0.17.0"
+yew-hooks = "0.2.0"
+wasm-bindgen = "0.2"
+wasm-logger = "0.2.0"
+getrandom = { version = "0.2", features = ["js"] }
+rand = "0.8.5"
+web-sys = "0.3.64"
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
+gloo-utils = "0.1.5"
+
+[dev-dependencies.web-sys]
+version = "0.3"
+features = ["Document", "Element", "HtmlCollection"]
