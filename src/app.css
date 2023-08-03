@@ -5,3 +5,18 @@
   flex-direction: column;
   height: 100vh;
 }
+
+.removed-crab {
+  animation: crab-removal-sliding 1s ease-in-out;
+}
+
+@keyframes crab-removal-sliding {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
