@@ -21,6 +21,7 @@ wasm-logger = "0.2.0"
 getrandom = { version = "0.2", features = ["js"] }
 rand = "0.8.5"
 web-sys = "0.3.64"
+stylist = { version = "0.12.1", features = ["yew", "parser"] }
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3"
