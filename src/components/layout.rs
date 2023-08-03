@@ -1,4 +1,7 @@
+use stylist::{yew::styled_component, Style};
 use yew::prelude::*;
+
+const STYLESHEET: &str = include_str!("../app.css");
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
@@ -6,11 +9,15 @@ pub struct Props {
     pub children: Children,
 }
 
-#[function_component(Layout)]
+#[styled_component(Layout)]
 pub fn layout(props: &Props) -> Html {
+    let css: Style = Style::new(STYLESHEET).unwrap();
+
     html! {
-        <div class="flex items-center justify-center h-screen flex-col">
-            {props.children.clone()}
+        <div class={css}>
+            <div class="layout">
+                {props.children.clone()}
+            </div>
         </div>
     }
 }
