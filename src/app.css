@@ -8,6 +8,10 @@
 
 .removed-crab {
   animation: crab-removal-sliding 1s ease-in-out;
+  cursor: initial !important;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
 }
 
 @keyframes crab-removal-sliding {
