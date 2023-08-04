@@ -43,7 +43,19 @@ pub fn app() -> Html {
 
         Callback::from(move |_| {
             let mut crabs_vec = crabs.to_vec();
-            crabs_vec.drain(0..*remove_amount as usize);
+            let mut removed_count = 0;
+
+            for crab in crabs_vec.iter_mut() {
+                if !crab.removed {
+                    crab.to_removed();
+                    removed_count += 1;
+                }
+
+                if removed_count >= *remove_amount as usize {
+                    break;
+                }
+            }
+
             crabs.set(crabs_vec);
         })
     };
