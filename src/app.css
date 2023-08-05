@@ -8,7 +8,7 @@
 
 .rust-nim-game-title {
   font-family: "Bungee", cursive;
-  font-size: clamp(52px, 5vw, 96px);
+  font-size: clamp(44px, 5vw, 96px);
   font-weight: bold;
   color: #f05a22;
   text-align: center;
@@ -16,14 +16,14 @@
 }
 
 .crabs-flex {
-  width: 100%;
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
+  width: 100% !important;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .removed-crab {
   animation: crab-removal-sliding 1s ease-in-out;
-  cursor: initial !important;
+  cursor: none;
   animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
@@ -35,6 +35,8 @@
   cursor: pointer;
   min-width: 40px;
   min-height: 40px;
+  width: 3.90625vmax;
+  height: 3.90625vmax;
 }
 
 .crabs-control {
@@ -42,14 +44,6 @@
   align-items: center;
   justify-content: center;
   margin-top: 1.25rem;
-}
-
-.removed-crab {
-  animation: crab-removal-sliding 1s ease-in-out;
-  cursor: none;
-  animation-fill-mode: forwards;
-  -webkit-animation-fill-mode: forwards;
-  -moz-animation-fill-mode: forwards;
 }
 
 @keyframes crab-removal-sliding {
@@ -60,19 +54,5 @@
   100% {
     opacity: 0;
     transform: translateX(-100%);
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  .crab {
-    width: 60px;
-    height: 60px;
-  }
-}
-
-@media only screen and (max-width: 900px) {
-  .crab {
-    width: 53px;
-    height: 53px;
   }
 }
