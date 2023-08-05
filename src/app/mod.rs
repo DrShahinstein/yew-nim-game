@@ -62,20 +62,17 @@ pub fn app() -> Html {
 
     html! {
         <Layout>
-            /*
-            TODO: Create a pleasent title with a correct position on the window
-            <div class="text-5xl font-bold text-center text-indigo-600">
+            <div class="rust-nim-game-title">
                 {"RUST NIM GAME"}
             </div>
-            */
 
-            <div>
-                <div class="ml-10 mr-10">
+            <div class="nim-game">
+                <div class="crabs-flex">
                     { crabs.iter().map(|el: &Crab| el.html.clone()).collect::<Vec<Html>>() }
                 </div>
-                <div class="flex items-center justify-center mt-5">
+                <div class="crabs-control">
                     <input
-                        class="border rounded-lg px-4 py-2 w-40 lg:w-48 text-center focus:outline-none focus:ring focus:border-blue-300 transition text-gray-800 border-gray-400"
+                        class="crabs-control--input"
                         type="number"
                         min="1"
                         max="2"
@@ -83,7 +80,7 @@ pub fn app() -> Html {
                         oninput={on_set_removal} />
                     <button
                         onclick={on_remove_click}
-                        class="bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-4 py-2 ml-2 focus:outline-none focus:ring focus:border-blue-300 transition"
+                        class="crabs-control--btn"
                         type="button">
                         {"Remove Crabs"}
                     </button>
