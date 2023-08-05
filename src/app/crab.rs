@@ -11,11 +11,11 @@ impl Crab {
     pub fn new(id: i32) -> Self {
         let html = html! {
             <img
-             class="mr-3 inline cursor-pointer lg:w-[75px] lg:h-[75px]"
+             class="crab"
              src="/public/cuddlyferris.svg"
              alt="crabimg"
-             width="60"
-             height="60"
+             width="75"
+             height="75"
             />
         };
 
@@ -29,11 +29,11 @@ impl Crab {
     pub fn to_removed(&mut self) {
         let html = html! {
             <img
-             class="mr-3 inline cursor-pointer lg:w-[75px] lg:h-[75px] removed-crab"
+             class="crab removed-crab"
              src="/public/cuddlyferris.svg"
              alt="crabimg"
-             width="60"
-             height="60"
+             width="75"
+             height="75"
             />
         };
 
