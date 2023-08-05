@@ -1,17 +1,51 @@
 .layout {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 100vh;
+  @apply flex items-center justify-center flex-col;
+  @apply h-screen;
+}
+
+.rust-nim-game-title {
+  @apply font-bold text-5xl text-center text-orange-500;
+  @apply font-bungee;
+  @apply text-shadow-md;
+}
+
+.crab {
+  @apply mr-3;
+  @apply inline;
+  @apply cursor-pointer;
+  @apply lg:w-[75px] lg:h-[75px];
+}
+
+.crabs-flex {
+  @apply ml-10 mr-10;
+}
+
+.crabs-control {
+  @apply flex items-center justify-center
+  @apply mt-5;
+}
+
+.crabs-control--input {
+  @apply border rounded-lg;
+  @apply px-4 py-2 w-40 lg:w-48;
+  @apply text-center;
+  @apply focus:outline-none focus:ring focus:border-blue-300 transition;
+  @apply text-gray-800 border-gray-400;
+}
+
+.crabs-control--btn {
+  @apply bg-blue-500 hover:bg-blue-600 text-white;
+  @apply rounded-lg;
+  @apply px-4 py-2 ml-2;
+  @apply focus:outline-none focus:ring focus:border-blue-300;
+  @apply transition;
 }
 
 .removed-crab {
-  animation: crab-removal-sliding 1s ease-in-out;
-  cursor: initial !important;
-  animation-fill-mode: both;
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
+  @apply animate-crab-removal-sliding cursor-not-allowed;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
 }
 
 @keyframes crab-removal-sliding {
