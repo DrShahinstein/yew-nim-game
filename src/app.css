@@ -8,11 +8,17 @@
 
 .rust-nim-game-title {
   font-family: "Bungee", cursive;
-  font-size: 5vw;
+  font-size: clamp(52px, 5vw, 96px);
   font-weight: bold;
   color: #f05a22;
   text-align: center;
   text-shadow: 2px 2px #000;
+}
+
+.crabs-flex {
+  width: 100%;
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
 }
 
 .removed-crab {
@@ -27,11 +33,8 @@
   display: inline;
   margin-right: 0.75rem;
   cursor: pointer;
-}
-
-.crabs-flex {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
+  min-width: 40px;
+  min-height: 40px;
 }
 
 .crabs-control {
@@ -57,5 +60,19 @@
   100% {
     opacity: 0;
     transform: translateX(-100%);
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .crab {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .crab {
+    width: 53px;
+    height: 53px;
   }
 }
