@@ -72,7 +72,7 @@ pub fn app() -> Html {
                 </div>
                 <div class="crabs-control">
                     <input
-                        class="crabs-control--input"
+                        class="border rounded-lg px-4 py-2 w-40 lg:w-48 text-center focus:outline-none focus:ring focus:border-blue-300 transition text-gray-800 border-gray-400"
                         type="number"
                         min="1"
                         max="2"
@@ -80,7 +80,7 @@ pub fn app() -> Html {
                         oninput={on_set_removal} />
                     <button
                         onclick={on_remove_click}
-                        class="crabs-control--btn"
+                        class="bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-4 py-2 ml-2 focus:outline-none focus:ring focus:border-blue-300 transition"
                         type="button">
                         {"Remove Crabs"}
                     </button>
