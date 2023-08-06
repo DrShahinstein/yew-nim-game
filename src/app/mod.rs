@@ -1,6 +1,8 @@
 pub mod crab;
 
 use crate::components::layout::Layout;
+use crate::minimax::best_move;
+use crab::AnimationRotation;
 use crab::Crab;
 use rand::Rng;
 use wasm_bindgen::JsCast;
@@ -47,12 +49,24 @@ pub fn app() -> Html {
 
             for crab in crabs_vec.iter_mut() {
                 if !crab.removed {
-                    crab.to_removed();
+                    crab.turn_into_removed(AnimationRotation::Left);
                     removed_count += 1;
                 }
 
                 if removed_count >= *remove_amount as usize {
                     break;
+                }
+            }
+
+            let remaining_crabs = crabs_vec.iter().filter(|crab| !crab.removed).count() as i32;
+            let computer_move = best_move(remaining_crabs);
+            let iter_mut_crabs_reversed = crabs_vec.iter_mut().rev();
+            let mut removed_count = 0;
+
+            for crab in iter_mut_crabs_reversed {
+                if !crab.removed && removed_count < computer_move {
+                    crab.turn_into_removed(AnimationRotation::Right);
+                    removed_count += 1;
                 }
             }
 
