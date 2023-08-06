@@ -22,8 +22,18 @@
 }
 
 .removed-crab {
-  animation: crab-removal-sliding 1s ease-in-out;
   cursor: none;
+}
+
+.removed-crab-sliding-left {
+  animation: crab-removal-sliding-left 1s ease-in-out;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+}
+
+.removed-crab-sliding-right {
+  animation: crab-removal-sliding-right 1s ease-in-out;
   animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
@@ -54,7 +64,7 @@
   font-size: clamp(12px, 1.4vw, 18px);
 }
 
-@keyframes crab-removal-sliding {
+@keyframes crab-removal-sliding-left {
   0% {
     opacity: 1;
     transform: translateX(0);
@@ -62,5 +72,16 @@
   100% {
     opacity: 0;
     transform: translateX(-100%);
+  }
+}
+
+@keyframes crab-removal-sliding-right {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
   }
 }
