@@ -46,6 +46,14 @@
   margin-top: 1.25rem;
 }
 
+.crabs-control input {
+  font-size: clamp(12px, 1.4vw, 18px);
+}
+
+.crabs-control button {
+  font-size: clamp(12px, 1.4vw, 18px);
+}
+
 @keyframes crab-removal-sliding {
   0% {
     opacity: 1;
