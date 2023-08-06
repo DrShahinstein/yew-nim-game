@@ -1,5 +1,10 @@
 use yew::prelude::*;
 
+pub enum AnimationRotation {
+    Left,
+    Right,
+}
+
 #[derive(Clone)]
 pub struct Crab {
     pub html: Html,
@@ -26,10 +31,15 @@ impl Crab {
         }
     }
 
-    pub fn to_removed(&mut self) {
+    pub fn turn_into_removed(&mut self, animation_rotation: AnimationRotation) {
+        let rotation = match animation_rotation {
+            AnimationRotation::Left => "removed-crab-sliding-left",
+            AnimationRotation::Right => "removed-crab-sliding-right",
+        };
+
         let html = html! {
             <img
-             class="crab removed-crab"
+             class={format!("crab removed-crab {}", rotation)}
              src="/public/cuddlyferris.svg"
              alt="crabimg"
              width="75"
