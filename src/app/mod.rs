@@ -2,6 +2,7 @@ pub mod crab;
 
 use crate::components::layout::Layout;
 use crate::minimax::best_move;
+use crate::minimax::Player;
 use crab::AnimationRotation;
 use crab::Crab;
 use rand::Rng;
@@ -59,7 +60,7 @@ pub fn app() -> Html {
             }
 
             let remaining_crabs = crabs_vec.iter().filter(|crab| !crab.removed).count() as i32;
-            let computer_move = best_move(remaining_crabs);
+            let computer_move = best_move(remaining_crabs, Player::Computer);
             let iter_mut_crabs_reversed = crabs_vec.iter_mut().rev();
             let mut removed_count = 0;
 
