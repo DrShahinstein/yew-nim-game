@@ -1,6 +1,7 @@
 const MAX_REMOVAL: i32 = 2;
 
 // User is the one moving first
+#[derive(PartialEq, Clone, Copy)]
 pub enum Player {
     User,
     Computer,
