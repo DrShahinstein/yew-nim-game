@@ -1,5 +1,6 @@
 pub mod crab;
 
+use crate::components::game_result::GameResult;
 use crate::components::layout::Layout;
 use crate::minimax::best_move;
 use crate::minimax::Player;
@@ -14,9 +15,23 @@ use yew_hooks::prelude::*;
 const MIN_CRABS: i32 = 15;
 const MAX_CRABS: i32 = 21;
 
+#[derive(Clone, Copy)]
+struct GameState {
+    winner: Option<Player>,
+    show_result: bool,
+}
+
+pub fn get_remaining_crabs(crabs_vec: Vec<Crab>) -> i32 {
+    crabs_vec.iter().filter(|crab| !crab.removed).count() as i32
+}
+
 #[function_component(App)]
 pub fn app() -> Html {
     let remove_amount = use_counter(1);
+    let game_result = use_state(|| GameState {
+        winner: None,
+        show_result: false,
+    });
     let crabs = use_state(|| {
         let num_crabs = rand::thread_rng().gen_range(MIN_CRABS..=MAX_CRABS);
         (0..num_crabs).map(Crab::new).collect::<Vec<Crab>>()
@@ -41,39 +56,71 @@ pub fn app() -> Html {
     };
 
     let on_remove_click = {
+        let game_result = game_result.clone();
         let crabs = crabs.clone();
         let remove_amount = remove_amount.clone();
 
         Callback::from(move |_| {
+            if game_result.winner.is_some() {
+                return;
+            }
+
             let mut crabs_vec = crabs.to_vec();
-            let mut removed_count = 0;
+            let mut removed_crabs = 0;
 
             for crab in crabs_vec.iter_mut() {
                 if !crab.removed {
                     crab.turn_into_removed(AnimationRotation::Left);
-                    removed_count += 1;
+                    removed_crabs += 1;
                 }
 
-                if removed_count >= *remove_amount as usize {
+                if removed_crabs >= *remove_amount as usize {
                     break;
                 }
             }
 
-            let remaining_crabs = crabs_vec.iter().filter(|crab| !crab.removed).count() as i32;
-            let computer_move = best_move(remaining_crabs, Player::Computer);
-            let iter_mut_crabs_reversed = crabs_vec.iter_mut().rev();
-            let mut removed_count = 0;
+            let remaining_crabs = get_remaining_crabs(crabs_vec.clone());
 
-            for crab in iter_mut_crabs_reversed {
-                if !crab.removed && removed_count < computer_move {
-                    crab.turn_into_removed(AnimationRotation::Right);
-                    removed_count += 1;
+            // User wins
+            if remaining_crabs == 0 {
+                game_result.set(GameState {
+                    winner: Some(Player::User),
+                    show_result: true,
+                })
+            }
+            // Computer wins
+            else {
+                let computer_move = best_move(remaining_crabs, Player::Computer);
+                let iter_mut_crabs_reversed = crabs_vec.iter_mut().rev();
+                let mut removed_crabs = 0;
+
+                for crab in iter_mut_crabs_reversed {
+                    if !crab.removed && removed_crabs < computer_move {
+                        crab.turn_into_removed(AnimationRotation::Right);
+                        removed_crabs += 1;
+                    }
+                }
+
+                crabs.set(crabs_vec.clone());
+
+                let remaining_crabs = get_remaining_crabs(crabs_vec.clone());
+                if remaining_crabs == 0 {
+                    game_result.set(GameState {
+                        winner: Some(Player::Computer),
+                        show_result: true,
+                    })
                 }
             }
-
-            crabs.set(crabs_vec);
         })
     };
+
+    let game_result = game_result.clone();
+    if game_result.show_result {
+        let winner = game_result.winner.unwrap();
+        return html! {
+            <GameResult winner={winner} />
+        };
+    }
 
     html! {
         <Layout>
