@@ -165,6 +165,7 @@ pub fn app() -> Html {
                     <button
                         onclick={on_remove_click}
                         class="bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-4 py-2 ml-2 focus:outline-none focus:ring focus:border-blue-300 transition"
+                        disabled={game_result.show_result || get_remaining_crabs(crabs.to_vec()) == 0}
                         type="button">
                         {"Remove Crabs"}
                     </button>
