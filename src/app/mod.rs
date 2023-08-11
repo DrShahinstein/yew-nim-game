@@ -20,6 +20,19 @@ struct GameState {
     winner: Option<Player>,
     show_result: bool,
 }
+impl GameState {
+    pub fn new() -> Self {
+        Self {
+            winner: None,
+            show_result: false,
+        }
+    }
+}
+
+pub fn initialize_crabs() -> Vec<Crab> {
+    let num_crabs = rand::thread_rng().gen_range(MIN_CRABS..=MAX_CRABS);
+    (0..num_crabs).map(Crab::new).collect::<Vec<Crab>>()
+}
 
 pub fn get_remaining_crabs(crabs_vec: Vec<Crab>) -> i32 {
     crabs_vec.iter().filter(|crab| !crab.removed).count() as i32
@@ -28,14 +41,8 @@ pub fn get_remaining_crabs(crabs_vec: Vec<Crab>) -> i32 {
 #[function_component(App)]
 pub fn app() -> Html {
     let remove_amount = use_counter(1);
-    let game_result = use_state(|| GameState {
-        winner: None,
-        show_result: false,
-    });
-    let crabs = use_state(|| {
-        let num_crabs = rand::thread_rng().gen_range(MIN_CRABS..=MAX_CRABS);
-        (0..num_crabs).map(Crab::new).collect::<Vec<Crab>>()
-    });
+    let crabs = use_state(initialize_crabs);
+    let game_result = use_state(GameState::new);
 
     let on_set_removal = {
         let remove_amount = remove_amount.clone();
@@ -114,11 +121,21 @@ pub fn app() -> Html {
         })
     };
 
+    let replay_game = {
+        let crabs = crabs.clone();
+        let game_result = game_result.clone();
+
+        Callback::from(move |_| {
+            crabs.set(initialize_crabs());
+            game_result.set(GameState::new());
+        })
+    };
+
     let game_result = game_result.clone();
     if game_result.show_result {
         let winner = game_result.winner.unwrap();
         return html! {
-            <GameResult winner={winner} />
+            <GameResult winner={winner} on_replay={replay_game.clone()} />
         };
     }
 
