@@ -6,6 +6,7 @@ use crate::minimax::best_move;
 use crate::minimax::Player;
 use crab::AnimationRotation;
 use crab::Crab;
+use gloo::timers::callback::Timeout;
 use rand::Rng;
 use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
@@ -112,10 +113,14 @@ pub fn app() -> Html {
 
                 let remaining_crabs = get_remaining_crabs(crabs_vec.clone());
                 if remaining_crabs == 0 {
-                    game_result.set(GameState {
-                        winner: Some(Player::Computer),
-                        show_result: true,
-                    })
+                    let game_result = game_result.clone();
+                    let timeout = Timeout::new(1_200, move || {
+                        game_result.set(GameState {
+                            winner: Some(Player::Computer),
+                            show_result: true,
+                        });
+                    });
+                    timeout.forget();
                 }
             }
         })
