@@ -8,7 +8,7 @@ A web application of nim-game using Rust & Yew.rs technologies implementing a mi
 - The game is played between user, who represents the player, and computer acting as the opponent.
 - User starts off by removing one or two crabs from the row as a beginning.
 - Afterward, computer counters the player's move using the minimax algorithm.
-- The game keeps continuing until a player removes the last crab (or crabs), and the one who accomplishes this is declared the winner.
+- The game keeps continuing until a player removes the last crab(s), and the one who accomplishes this is declared the winner.
 
 ## Screenshots
 
