@@ -1,6 +1,6 @@
-# Nim Game Built Using Yew.rs
+# yew-nim-game
 
-A web application of nim-game using Rust & Yew.rs technologies implementing a minimax algorithm for counter moves.
+A fundamental web assembly app using rust and yew.rs implementing minimax algorithm for counter moves.
 
 ## Game Logic
 
@@ -25,7 +25,3 @@ A web application of nim-game using Rust & Yew.rs technologies implementing a mi
 
 1. `$ git clone https://github.com/DrShahinstein/yew-nim-game.git`
 2. `[yew-nim-game]$ trunk serve`
-
-## Contribution
-
-I'd love to meet your contributions on this project. As someone who improves his Rust skills, working together with Rustaceans would be a cuddly gesture.
